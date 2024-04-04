@@ -39,6 +39,7 @@ sub new {
         'memory'        => 'cloud::azure::database::sqldatabase::mode::memory',
         'sessions'      => 'cloud::azure::database::sqldatabase::mode::sessions',
         'storage'       => 'cloud::azure::database::sqldatabase::mode::storage',
+        'syncgroup'     => 'cloud::azure::database::sqldatabase::mode::syncgroup',
         'workers'       => 'cloud::azure::database::sqldatabase::mode::workers'
     };
 
