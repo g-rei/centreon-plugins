@@ -811,6 +811,25 @@ sub azure_list_sqldatabases {
     return $full_response;
 }
 
+sub azure_get_syncgroup_set_url {
+    my ($self, %options) = @_;
+
+    my $url = $self->{management_endpoint} . "/subscriptions/" . $self->{subscription};
+    $url .= "/resourceGroups/" . $options{resource_group} if (defined($options{resource_group}) && $options{resource_group} ne '');
+    $url .= "/providers/Microsoft.Sql/servers/" . $options{servers} if (defined($options{servers}) && $options{servers} ne '');
+    $url .= "/databases/" . $options{databases} if (defined($options{databases}) && $options{databases} ne '');
+    $url .= "/syncGroups/" . $options{sync_group} if (defined($options{sync_group}) && $options{sync_group} ne '');
+    $url .= "?api-version=" . $options{api_version};
+    return $url;
+}
+
+sub azure_get_syncgroup {
+    my ($self, %options) = @_;
+    my $full_url = $self->azure_get_syncgroup_set_url(%options);
+    my $response = $self->request_api(method => 'GET', full_url => $full_url, hostname => '');
+    return $response;
+}
+
 sub azure_get_log_analytics_set_url {
     my ($self, %options) = @_;
 
